@@ -91,6 +91,135 @@ A full-stack web application for tracking sleep patterns and managing sleep data
    npm start
    ```
 
+## Automated Testing
+
+### Prerequisites for Testing
+- Python 3.8-3.11 (recommended for better compatibility)
+- pip (Python package installer)
+- Chrome browser installed
+
+### Setting Up Test Environment
+
+1. **Create and activate a virtual environment**
+   ```bash
+   # Windows
+   python -m venv .venv
+   .venv\Scripts\activate
+
+   # Linux/Mac
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+
+2. **Install test dependencies**
+   ```bash
+   cd automatedtests
+   pip install -r requirements.txt
+   ```
+
+### Test Structure
+automatedtests/
+├── resources/ # Reusable keywords and common settings
+│ ├── common.robot # Common settings and keywords
+│ └── login_keywords.robot
+├── test_data/ # Test data files
+│ └── login_data.robot
+├── tests/ # Test suites
+│ └── login_tests.robot
+└── requirements.txt # Python dependencies
+
+
+### Running Tests
+
+1. **Run all tests**
+   ```bash
+   robot tests/
+   ```
+
+2. **Run specific test suite**
+   ```bash
+   robot automatedtests/tests/login_tests.robot
+   ```
+
+3. **Run tests with specific tag**
+   ```bash
+   robot -i smoke automatedtests/tests/
+   ```
+
+4. **Generate reports in custom directory**
+   ```bash
+   robot --outputdir results automatedtests/tests/
+   ```
+
+### Test Reports
+After running the tests, Robot Framework generates three files:
+- `report.html` - Test results in HTML format
+- `log.html` - Detailed test execution log
+- `output.xml` - Test results in XML format
+
+### Available Test Suites
+
+#### Login Tests (`login_tests.robot`)
+- Valid Login Test
+- Invalid Login Test
+- Valid Registration Test
+- Invalid Registration Test
+- Switch Between Login And Register Forms
+
+### Troubleshooting Test Environment
+
+1. **WebDriver Issues**
+   ```bash
+   # Update webdriver manually
+   webdriver-manager update
+   ```
+
+2. **Python Version Compatibility**
+   - If using Python 3.12, downgrade to Python 3.11 for better compatibility
+   - Or use the following alternative installation:
+     ```bash
+     pip install selenium-webdriver-manager
+     ```
+
+3. **Browser Driver Issues**
+   - Ensure Chrome browser is installed
+   - Try clearing the webdriver cache:
+     ```bash
+     webdriver-manager clean
+     webdriver-manager update
+     ```
+
+### Adding New Tests
+
+1. Create a new test file in `automatedtests/tests/`
+2. Add keywords in `automatedtests/resources/`
+3. Add test data in `automatedtests/test_data/`
+4. Follow the existing test structure and naming conventions
+
+### Best Practices
+
+1. **Test Organization**
+   - Use descriptive test names
+   - Group related tests in the same suite
+   - Use tags for test categorization
+
+2. **Test Data Management**
+   - Keep test data separate from test cases
+   - Use variables for repeated values
+   - Avoid hardcoding test data in test cases
+
+3. **Keyword Usage**
+   - Create reusable keywords for common actions
+   - Follow the page object pattern
+   - Keep keywords focused and single-purpose
+
+4. **Reporting**
+   - Use meaningful test documentation
+   - Add detailed failure messages
+   - Regularly review test reports
+
+
+
 ## Docker Commands
 
 - Build and start all services:
