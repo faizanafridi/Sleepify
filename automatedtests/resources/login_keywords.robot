@@ -3,14 +3,14 @@ Library    SeleniumLibrary
 Resource    common.robot
 
 *** Variables ***
-${LOGIN_EMAIL_INPUT}        css=input[name="email"]
-${LOGIN_PASSWORD_INPUT}     css=input[name="password"]
-${REGISTER_NAME_INPUT}      css=input[name="names"]
-${SUBMIT_BUTTON}           css=input[type="submit"]
-${REGISTER_LINK}           //a[contains(text(),'Register')]
-${LOGIN_IN_LINK}           //button[contains(text(),'Log in')]
-${SIGN_IN_LINK}           //a[contains(text(),'Sign In')]
-${ERROR_MESSAGE}          css=span.text-red-600
+${LOGIN_EMAIL_INPUT}        //input[@name="email"]
+${LOGIN_PASSWORD_INPUT}     //input[@name="password"]
+${REGISTER_NAME_INPUT}      //input[@name="names"]
+${SUBMIT_BUTTON}            //input[@type="submit"]
+${REGISTER_LINK}            //a[contains(text(),'Register')]
+${LOGIN_IN_LINK}            //button[contains(text(),'Log in')]
+${SIGN_IN_LINK}             //a[contains(text(),'Sign In')]
+${ERROR_MESSAGE}            //span[@class="text-red-600"]
 
 *** Keywords ***
 Input Login Credentials
@@ -26,22 +26,19 @@ Input Registration Details
     Input Text    ${LOGIN_EMAIL_INPUT}    ${email}
     Input Text    ${LOGIN_PASSWORD_INPUT}    ${password}
 
-Click Submit Button
-    Wait Until Element Is Visible    ${SUBMIT_BUTTON}
-    Click Element    ${SUBMIT_BUTTON}
+Click Button
+    [Arguments]   ${button}
+    Wait Until Element Is Visible    ${button}
+    Click Element    ${button}
 
-Click Register Button
-     Wait Until Element Is Visible  ${REGISTER_LINK}
-    Click Element    ${REGISTER_LINK}
 
 Switch To Login Form
+    Wait Until Element Is Visible    ${LOGIN_IN_LINK}
     Click Element    ${LOGIN_IN_LINK}
-
-Click Sigin Button
-    Click Element    ${SIGN_IN_LINK}
 
 Verify Error Message
     [Arguments]    ${expected_message}
+    Wait Until Element Is Visible    ${ERROR_MESSAGE}
     Element Should Be Visible    ${ERROR_MESSAGE}
     Element Text Should Be    ${ERROR_MESSAGE}    ${expected_message}
 

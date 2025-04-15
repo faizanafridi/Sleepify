@@ -1,1 +1,6 @@
 .venv
+*.png
+output
+*.html
+*.log
+*.xml

@@ -3,4 +3,4 @@ logs
 *.html
 *.png
 /.venv
-
+output
